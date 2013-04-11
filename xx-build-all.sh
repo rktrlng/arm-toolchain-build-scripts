@@ -46,7 +46,7 @@ date >> xx-temp.txt
 
 ./08-build-gcc.sh 2>&1 | tee -a 08-build-gcc.log
 
-./09-build-gdb.sh 2>&1 | tee -a 09-build-gdb.log
+#./09-build-gdb.sh 2>&1 | tee -a 09-build-gdb.log
 
 ./10-strip.sh 2>&1 | tee -a 10-strip.log
 

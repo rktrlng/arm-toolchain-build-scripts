@@ -21,6 +21,10 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA 
 # 
 
+if [ -z "$TOOLCHAIN_DL_DIR" ]; then
+export TOOLCHAIN_DL_DIR=download/
+fi
+
 export target=arm-none-eabi
 export scripts_root=$(pwd)
 export prefix=$(pwd)/install
@@ -38,15 +42,15 @@ export CC='gcc -m32'
 #---------------------------------------------------------------------------------
 # Specify the version we will use
 #---------------------------------------------------------------------------------
-BINUTILS_VER=2.21.1
-export GCC_VER=4.6.1
+BINUTILS_VER=2.22
+export GCC_VER=4.6.3
 export NEWLIB_VER=1.19.0
-GDB_VER=7.3.1
+GDB_VER=7.4.1
 #GMP_VER=4.3.2
-GMP_VER=5.0.2
+GMP_VER=5.0.5
 #MPFR_VER=2.4.2
-MPFR_VER=3.1.0
-EXPAT_VER=2.0.1
+MPFR_VER=3.1.1
+EXPAT_VER=2.1.0
 MPC_VER=0.9
 
 #---------------------------------------------------------------------------------
