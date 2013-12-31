@@ -3,7 +3,7 @@
 # 
 # YAGARTO toolchain                                                       
 #                                                                            
-# Copyright (C) 2006-2011 by Michael Fischer                                      
+# Copyright (C) 2006-2012 by Michael Fischer                                      
 # Michael.Fischer@yagarto.de                                                 
 #                                                                            
 # This program is free software; you can redistribute it and/or modify       
@@ -22,24 +22,26 @@
 # 
 
 #---------------------------------------------------------------------------------
-# build and install the final compiler
+# build and install zlib
 #---------------------------------------------------------------------------------
 
-echo "Start of build:" > 08-temp.txt
-date >> 08-temp.txt 
+echo "Start of build:" > 02-temp.txt
+date >> 02-temp.txt 
 
-cd gcc-build
+cd $ZLIB_SRC
 
-#export LD_LIBRARY_PATH=$addon_tools_dir/lib:$LD_LIBRARY_PATH
+./configure \
+	--prefix=$addon_tools_dir \
+	--static \
+	|| { echo "Error configuring zlib"; exit 1; }  
 
-export CFLAGS="-I$addon_tools_dir/include"
-export LDFLAGS="-L$addon_tools_dir/lib"
-
-$MAKE || { echo "Error building gcc2"; exit 1; }
-$MAKE install || { echo "Error installing gcc2"; exit 1; }
+$MAKE || { echo "Error building zlib"; exit 1; }
+$MAKE install || { echo "Error installing zlib"; exit 1; }
 
 cd ..
 
-echo "End of build:" >> 08-temp.txt
-date >> 08-temp.txt 
-mv 08-temp.txt 08-ready.txt
+echo "End of build:" >> 02-temp.txt
+date >> 02-temp.txt 
+mv 02-temp.txt 02-ready.txt
+
+

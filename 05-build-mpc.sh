@@ -3,7 +3,7 @@
 # 
 # YAGARTO toolchain                                                       
 #                                                                            
-# Copyright (C) 2006-2011 by Michael Fischer                                      
+# Copyright (C) 2006-2012 by Michael Fischer                                      
 # Michael.Fischer@yagarto.de                                                 
 #                                                                            
 # This program is free software; you can redistribute it and/or modify       
@@ -22,32 +22,35 @@
 # 
 
 #---------------------------------------------------------------------------------
-# build and install newlib
+# build and install mpc
 #---------------------------------------------------------------------------------
 
-echo "Start of build:" > 07-temp.txt
-date >> 07-temp.txt 
+echo "Start of build:" > 05-temp.txt
+date >> 05-temp.txt 
 
-mkdir -p newlib-build
-cd newlib-build
-mkdir -p etc
+mkdir -p mpc-build
+cd mpc-build
 
-#export LD_LIBRARY_PATH=$addon_tools_dir/lib:$LD_LIBRARY_PATH
+if [ "$OSTYPE" = "msys" ]
+then
+export CFLAGS=-D__USE_MINGW_ACCESS
+fi
 
-#export CFLAGS="-I$addon_tools_dir/include"
-#export LDFLAGS="-L$addon_tools_dir/lib"
+../$MPC_SRC/configure $ABI_MODE \
+	--prefix=$addon_tools_dir \
+	--disable-shared \
+	--enable-static \
+	--with-gmp=$addon_tools_dir \
+	--with-mpfr=$addon_tools_dir \
+	|| { echo "Error configuring mpc"; exit 1; }
 
-../$NEWLIB_SRC/configure \
-	--target=$target --prefix=$prefix \
-	--enable-interwork --enable-multilib \
-	--disable-newlib-supplied-syscalls \
-	|| { echo "Error configuring newlib"; exit 1; }
-
-$MAKE || { echo "Error building newlib"; exit 1; }
-$MAKE install || { echo "Error installing newlib"; exit 1; }
+$MAKE || { echo "Error building mpc"; exit 1; }
+$MAKE install || { echo "Error installing mpc"; exit 1; }
 
 cd ..
 
-echo "End of build:" >> 07-temp.txt
-date >> 07-temp.txt 
-mv 07-temp.txt 07-ready.txt
+echo "End of build:" >> 05-temp.txt
+date >> 05-temp.txt 
+mv 05-temp.txt 05-ready.txt
+
+

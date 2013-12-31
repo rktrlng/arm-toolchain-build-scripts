@@ -3,7 +3,7 @@
 # 
 # YAGARTO toolchain                                                       
 #                                                                            
-# Copyright (C) 2006-2011 by Michael Fischer                                      
+# Copyright (C) 2006-2012 by Michael Fischer                                      
 # Michael.Fischer@yagarto.de                                                 
 #                                                                            
 # This program is free software; you can redistribute it and/or modify       
@@ -22,33 +22,38 @@
 # 
 
 #---------------------------------------------------------------------------------
-# build and install binutils
+# build and install gmp
 #---------------------------------------------------------------------------------
 
-echo "Start of build:" > 02-temp.txt
-date >> 02-temp.txt 
+echo "Start of build:" > 03-temp.txt
+date >> 03-temp.txt 
 
 mkdir -p gmp-build
 cd gmp-build
 
+if [ "$OSTYPE" = "msys" ]
+then
+export CFLAGS=-D__USE_MINGW_ACCESS
+fi
+
 ../$GMP_SRC/configure $ABI_MODE \
 	--prefix=$addon_tools_dir \
+	--disable-shared \
 	|| { echo "Error configuring gmp"; exit 1; }
 
 $MAKE || { echo "Error building gmp"; exit 1; }
 $MAKE check || { echo "Error checking gmp"; exit 1; }
 $MAKE install || { echo "Error installing gmp"; exit 1; }
 
-rm $addon_tools_dir/lib/*.dylib
-rm $addon_tools_dir/lib/libgmp.so*
+#rm $addon_tools_dir/lib/*.dylib
 
-cp ../$GMP_SRC/gmp-impl.h .
-cp ../$GMP_SRC/longlong.h .
+#cp ../$GMP_SRC/gmp-impl.h .
+#cp ../$GMP_SRC/longlong.h .
 
 cd ..
 
-echo "End of build:" >> 02-temp.txt
-date >> 02-temp.txt 
-mv 02-temp.txt 02-ready.txt
+echo "End of build:" >> 03-temp.txt
+date >> 03-temp.txt 
+mv 03-temp.txt 03-ready.txt
 
 

@@ -3,7 +3,7 @@
 # 
 # YAGARTO toolchain                                                       
 #                                                                            
-# Copyright (C) 2006-2011 by Michael Fischer                                      
+# Copyright (C) 2006-2012 by Michael Fischer                                      
 # Michael.Fischer@yagarto.de                                                 
 #                                                                            
 # This program is free software; you can redistribute it and/or modify       
@@ -22,34 +22,31 @@
 # 
 
 #---------------------------------------------------------------------------------
-# Call all scripts for compiling the toolchain
+# Call all scripts for recompiling the toolchain
 #---------------------------------------------------------------------------------
+
+rm -rf *-*.txt \
+*.log \
+install \
+addontools \
+*-build
 
 echo "Start of build:" > xx-temp.txt
 date >> xx-temp.txt 
 
-#. 00-set-env.sh
-. _env-only.sh
-
-#./01-build-expat.sh 2>&1 | tee -a 01-build-expat.log
-
-#./02-build-gmp.sh 2>&1 | tee -a 02-build-gmp.log
-
-#./03-build-mpfr.sh 2>&1 | tee -a 03-build-mpfr.log
-
-#./04-build-mpc.sh 2>&1 | tee -a 04-build-mpc.log
-
-#./05-build-binutils.sh 2>&1 | tee -a 05-build-binutils.log
-
-./06-build-bootgcc.sh 2>&1 | tee -a 06-build-bootgcc.log
-
-./07-build-newlib.sh 2>&1 | tee -a 07-build-newlib.log
-
-./08-build-gcc.sh 2>&1 | tee -a 08-build-gcc.log
-
-./09-build-gdb.sh 2>&1 | tee -a 09-build-gdb.log
-
-./10-strip.sh 2>&1 | tee -a 10-strip.log
+. ./_env-only.sh
+./01-build-expat.sh 2>&1 | tee -a 01-build-expat.log
+./02-build-zlib.sh 2>&1 | tee -a 02-build-zlib.log
+./03-build-gmp.sh 2>&1 | tee -a 03-build-gmp.log
+./04-build-mpfr.sh 2>&1 | tee -a 04-build-mpfr.log
+./05-build-mpc.sh 2>&1 | tee -a 05-build-mpc.log
+./06-build-binutils.sh 2>&1 | tee -a 06-build-binutils.log
+./07-build-bootgcc.sh 2>&1 | tee -a 07-build-bootgcc.log
+./08-build-newlib.sh 2>&1 | tee -a 08-build-newlib.log
+./09-build-gcc.sh 2>&1 | tee -a 09-build-gcc.log
+./10-build-gdb.sh 2>&1 | tee -a 10-build-gdb.log
+./11-strip.sh 2>&1 | tee -a 11-strip.log
+./12-build-pdf.sh 2>&1 | tee -a 12-build-pdf.log
 
 echo "End of build:" >> xx-temp.txt
 date >> xx-temp.txt 

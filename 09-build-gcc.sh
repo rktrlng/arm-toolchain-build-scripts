@@ -22,29 +22,19 @@
 # 
 
 #---------------------------------------------------------------------------------
-# Call all scripts for compiling the toolchain
+# build and install the final compiler
 #---------------------------------------------------------------------------------
 
-echo "Start of build:" > xx-temp.txt
-date >> xx-temp.txt 
+echo "Start of build:" > 09-temp.txt
+date >> 09-temp.txt 
 
-. ./00-set-env.sh
-./01-build-expat.sh 2>&1 | tee -a 01-build-expat.log
-./02-build-zlib.sh 2>&1 | tee -a 02-build-zlib.log
-./03-build-gmp.sh 2>&1 | tee -a 03-build-gmp.log
-./04-build-mpfr.sh 2>&1 | tee -a 04-build-mpfr.log
-./05-build-mpc.sh 2>&1 | tee -a 05-build-mpc.log
-./06-build-binutils.sh 2>&1 | tee -a 06-build-binutils.log
-./07-build-bootgcc.sh 2>&1 | tee -a 07-build-bootgcc.log
-./08-build-newlib.sh 2>&1 | tee -a 08-build-newlib.log
-./09-build-gcc.sh 2>&1 | tee -a 09-build-gcc.log
-./10-build-gdb.sh 2>&1 | tee -a 10-build-gdb.log
-./11-strip.sh 2>&1 | tee -a 11-strip.log
-./12-build-pdf.sh 2>&1 | tee -a 12-build-pdf.log
+cd gcc-build
 
-echo "End of build:" >> xx-temp.txt
-date >> xx-temp.txt 
-mv xx-temp.txt xx-ready.txt
+$MAKE || { echo "Error building gcc2"; exit 1; }
+$MAKE install || { echo "Error installing gcc2"; exit 1; }
 
+cd ..
 
-
+echo "End of build:" >> 09-temp.txt
+date >> 09-temp.txt 
+mv 09-temp.txt 09-ready.txt

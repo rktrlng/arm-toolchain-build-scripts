@@ -3,7 +3,7 @@
 # 
 # YAGARTO toolchain                                                       
 #                                                                            
-# Copyright (C) 2006-2011 by Michael Fischer                                      
+# Copyright (C) 2006-2012 by Michael Fischer                                      
 # Michael.Fischer@yagarto.de                                                 
 #                                                                            
 # This program is free software; you can redistribute it and/or modify       
@@ -22,29 +22,29 @@
 # 
 
 #---------------------------------------------------------------------------------
-# build and install binutils
+# build and install newlib
 #---------------------------------------------------------------------------------
 
-echo "Start of build:" > 05-temp.txt
-date >> 05-temp.txt 
+echo "Start of build:" > 08-temp.txt
+date >> 08-temp.txt 
 
-mkdir -p binutils-build
-cd binutils-build
+mkdir -p newlib-build
+cd newlib-build
+mkdir -p etc
 
-../$BINUTILS_SRC/configure \
-	--target=$target --prefix=$prefix \
-	--enable-interwork --enable-multilib \
-	--disable-nls --disable-shared --disable-threads \
-	--with-gcc --with-gnu-as --with-gnu-ld \
-	|| { echo "Error configuring binutils"; exit 1; }
+../$NEWLIB_SRC/configure \
+	--target=$target \
+	--prefix=$prefix \
+	--disable-newlib-supplied-syscalls \
+	--enable-interwork \
+	--enable-multilib \
+	|| { echo "Error configuring newlib"; exit 1; }
 
-$MAKE || { echo "Error building binutils"; exit 1; }
-$MAKE install || { echo "Error installing binutils"; exit 1; }
+$MAKE || { echo "Error building newlib"; exit 1; }
+$MAKE install || { echo "Error installing newlib"; exit 1; }
 
 cd ..
 
-echo "End of build:" >> 05-temp.txt
-date >> 05-temp.txt 
-mv 05-temp.txt 05-ready.txt
-
-
+echo "End of build:" >> 08-temp.txt
+date >> 08-temp.txt 
+mv 08-temp.txt 08-ready.txt

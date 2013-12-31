@@ -3,7 +3,7 @@
 # 
 # YAGARTO toolchain                                                       
 #                                                                            
-# Copyright (C) 2006-2011 by Michael Fischer                                      
+# Copyright (C) 2006-2012 by Michael Fischer                                      
 # Michael.Fischer@yagarto.de                                                 
 #                                                                            
 # This program is free software; you can redistribute it and/or modify       
@@ -22,27 +22,29 @@
 # 
 
 #---------------------------------------------------------------------------------
-# build and install binutils
+# strip binaries
+# strip has trouble using wildcards so do it this way instead
 #---------------------------------------------------------------------------------
 
-echo "Start of build:" > 03-temp.txt
-date >> 03-temp.txt 
+echo "Start of build:" > 11-temp.txt
+date >> 11-temp.txt 
 
-mkdir -p mpfr-build
-cd mpfr-build
 
-../$MPFR_SRC/configure $ABI_MODE \
-	--prefix=$addon_tools_dir --disable-shared \
-	--with-gmp-build=$scripts_root/gmp-build \
-	|| { echo "Error configuring mpfr"; exit 1; }
+for f in \
+	$prefix/bin/* \
+	$prefix/$target/bin/* \
+	$prefix/libexec/gcc/$target/$GCC_VER/*
+do
+	strip $f
+done
 
-$MAKE || { echo "Error building mpfr"; exit 1; }
-$MAKE install || { echo "Error installing mpfr"; exit 1; }
+#find $prefix -name "crt0.o" -exec rm {} \;
+#find $prefix -name "*.la" -exec rm {} \;
 
-cd ..
 
-echo "End of build:" >> 03-temp.txt
-date >> 03-temp.txt 
-mv 03-temp.txt 03-ready.txt
+echo "End of build:" >> 11-temp.txt
+date >> 11-temp.txt 
+mv 11-temp.txt 11-ready.txt
+
 
 

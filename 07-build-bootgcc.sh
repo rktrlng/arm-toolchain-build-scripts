@@ -3,7 +3,7 @@
 # 
 # YAGARTO toolchain                                                       
 #                                                                            
-# Copyright (C) 2006-2011 by Michael Fischer                                      
+# Copyright (C) 2006-2012 by Michael Fischer                                      
 # Michael.Fischer@yagarto.de                                                 
 #                                                                            
 # This program is free software; you can redistribute it and/or modify       
@@ -22,26 +22,56 @@
 # 
 
 #---------------------------------------------------------------------------------
-# strip binaries
-# strip has trouble using wildcards so do it this way instead
+# build and install just the c compiler
 #---------------------------------------------------------------------------------
 
-echo "Start of build:" > 10-temp.txt
-date >> 10-temp.txt 
+echo "Start of build:" > 07-temp.txt
+date >> 07-temp.txt 
 
+mkdir -p gcc-build
+cd gcc-build
 
-for f in \
-	$prefix/bin/* \
-	$prefix/$target/bin/* \
-	$prefix/libexec/gcc/$target/$GCC_VER/*
-do
-	strip $f
-done
+export CFLAGS="-I$addon_tools_dir/include"
+export LDFLAGS="-L$addon_tools_dir/lib"
 
+if [ "$OSTYPE" = "msys" ]
+then
+export CFLAGS=-D__USE_MINGW_ACCESS
+fi
 
-echo "End of build:" >> 10-temp.txt
-date >> 10-temp.txt 
-mv 10-temp.txt 10-ready.txt
+../$GCC_SRC/configure \
+	--target=$target \
+	--prefix=$prefix \
+	--disable-shared \
+	--disable-nls \
+	--disable-threads \
+	--disable-libssp \
+	--disable-libstdcxx-pch \
+	--disable-libmudflap \
+	--disable-libgomp -v \
+	--enable-languages=c,c++ \
+	--enable-interwork \
+	--enable-multilib \
+	--with-gcc \
+	--with-gnu-ld \
+	--with-gnu-as \
+	--with-dwarf2 \
+	--with-newlib \
+	--with-headers=../newlib-$NEWLIB_VER/newlib/libc/include \
+	--with-pkgversion='yagarto GCC' \
+	--with-mpc=$addon_tools_dir \
+	--with-mpfr=$addon_tools_dir \
+	--with-gmp=$addon_tools_dir \
+	|| { echo "Error configuring gcc"; exit 1; }
 
+mkdir -p libiberty libcpp fixincludes
 
+$MAKE all-gcc || { echo "Error building gcc"; exit 1; }
+$MAKE install-gcc || { echo "Error installing gcc"; exit 1; }
+
+cd ..
+
+echo "End of build:" >> 07-temp.txt
+date >> 07-temp.txt 
+mv 07-temp.txt 07-ready.txt
 

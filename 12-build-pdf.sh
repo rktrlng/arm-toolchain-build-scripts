@@ -3,7 +3,7 @@
 # 
 # YAGARTO toolchain                                                       
 #                                                                            
-# Copyright (C) 2006-2011 by Michael Fischer                                      
+# Copyright (C) 2006-2012 by Michael Fischer                                      
 # Michael.Fischer@yagarto.de                                                 
 #                                                                            
 # This program is free software; you can redistribute it and/or modify       
@@ -22,27 +22,35 @@
 # 
 
 #---------------------------------------------------------------------------------
-# build and install binutils
+# Call all scripts for building the PDF
 #---------------------------------------------------------------------------------
 
-echo "Start of build:" > 04-temp.txt
-date >> 04-temp.txt 
+echo "Start of build:" > 12-temp.txt
+date >> 12-temp.txt 
 
-mkdir -p mpc-build
-cd mpc-build
-
-../$MPC_SRC/configure $ABI_MODE \
-   CPPFLAGS=-I$addon_tools_dir/include LDFLAGS=-L$addon_tools_dir/lib \
-	--prefix=$addon_tools_dir --enable-static --disable-shared \
-	|| { echo "Error configuring mpc"; exit 1; }
-
-$MAKE || { echo "Error building mpc"; exit 1; }
-$MAKE install || { echo "Error installing mpc"; exit 1; }
-
+cd binutils-build
+make install-pdf
 cd ..
 
-echo "End of build:" >> 04-temp.txt
-date >> 04-temp.txt 
-mv 04-temp.txt 04-ready.txt
+cd gcc-build
+make install-pdf
+cd ..
+
+cd newlib-build
+make pdf
+cp arm-none-eabi/newlib/libc/libc.pdf $prefix/share/doc
+cp arm-none-eabi/newlib/libm/libm.pdf $prefix/share/doc
+cd ..
+
+cd gdb-build
+make install-pdf
+cd ..
+
+#rm $prefix/share/doc/libquadmath.pdf
+
+echo "End of build:" >> 12-temp.txt
+date >> 12-temp.txt 
+mv 12-temp.txt 12-ready.txt
+
 
 

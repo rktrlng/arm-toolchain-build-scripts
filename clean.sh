@@ -7,9 +7,8 @@ expat-* \
 gcc-* \
 gdb-* \
 gmp-* \
-gpl.txt \
 install \
-mpc-0.9 \
-mpc-build \
+mpc-* \
 mpfr-* \
-newlib-*
+newlib-* \
+zlib-*

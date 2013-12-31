@@ -3,7 +3,7 @@
 # 
 # YAGARTO toolchain                                                       
 #                                                                            
-# Copyright (C) 2006-2011 by Michael Fischer                                      
+# Copyright (C) 2006-2012 by Michael Fischer                                      
 # Michael.Fischer@yagarto.de                                                 
 #                                                                            
 # This program is free software; you can redistribute it and/or modify       
@@ -22,25 +22,42 @@
 # 
 
 #---------------------------------------------------------------------------------
-# build and install insight
+# build and install binutils
 #---------------------------------------------------------------------------------
 
-echo "Start of build:" > 09-temp.txt
-date >> 09-temp.txt 
+echo "Start of build:" > 06-temp.txt
+date >> 06-temp.txt 
 
-mkdir -p gdb-build
-cd gdb-build
+mkdir -p binutils-build
+cd binutils-build
 
-../$GDB_SRC/configure --target=$target --prefix=$prefix --disable-nls \
-       --with-libexpat-prefix=$addon_tools_dir \
-	|| { echo "Error configuring gdb"; exit 1; }
+if [ "$OSTYPE" = "msys" ]
+then
+export CFLAGS=-D__USE_MINGW_ACCESS
+fi
 
-$MAKE || { echo "Error building gdb"; exit 1; }
-$MAKE install || { echo "Error installing gdb"; exit 1; }
+CFLAGS="-I$addon_tools_dir/include" \
+LDFLAGS="-L$addon_tools_dir/lib" \
+../$BINUTILS_SRC/configure \
+	--target=$target \
+	--prefix=$prefix \
+	--disable-shared \
+	--disable-nls \
+	--disable-threads \
+	--enable-interwork \
+	--enable-multilib \
+	--with-gcc \
+	--with-gnu-as \
+	--with-gnu-ld \
+	|| { echo "Error configuring binutils"; exit 1; }
+
+$MAKE || { echo "Error building binutils"; exit 1; }
+$MAKE install || { echo "Error installing binutils"; exit 1; }
 
 cd ..
 
-echo "End of build:" >> 09-temp.txt
-date >> 09-temp.txt 
-mv 09-temp.txt 09-ready.txt
+echo "End of build:" >> 06-temp.txt
+date >> 06-temp.txt 
+mv 06-temp.txt 06-ready.txt
+
 

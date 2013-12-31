@@ -3,7 +3,7 @@
 # 
 # YAGARTO toolchain                                                       
 #                                                                            
-# Copyright (C) 2006-2011 by Michael Fischer                                      
+# Copyright (C) 2006-2012 by Michael Fischer                                      
 # Michael.Fischer@yagarto.de                                                 
 #                                                                            
 # This program is free software; you can redistribute it and/or modify       
@@ -27,39 +27,38 @@
 # This is done by a separate script, because if you have close your shell
 # you can set the environment again with this script only.
 #---------------------------------------------------------------------------------
-. _env-only.sh
+. ./_env-only.sh
 
 #---------------------------------------------------------------------------------
 # Extract source packages
 #---------------------------------------------------------------------------------
 
 echo "Extracting $BINUTILS_SRC"
-tar -xjf $TOOLCHAIN_DL_DIR/binutils-$BINUTILS_VER.tar.bz2 || { echo "Error extracting "$BINUTILS_SRC; exit; }
+tar -xjvf download/binutils-$BINUTILS_VER.tar.bz2 || { echo "Error extracting "$BINUTILS_SRC; exit; }
 
-echo "Extracting $GCC_CORE_SRC"
-tar -xjf $TOOLCHAIN_DL_DIR/$GCC_CORE_SRC.tar.bz2 || { echo "Error extracting "$GCC_CORE_SRC; exit; }
-
-echo "Extracting $GCC_GPP_SRC"
-tar -xjf $TOOLCHAIN_DL_DIR/$GCC_GPP_SRC.tar.bz2 || { echo "Error extracting "$GCC_GPP_SRC; exit; }
+echo "Extracting $GCC_SRC"
+tar -xjvf download/$GCC_SRC.tar.bz2 || { echo "Error extracting "$GCC_SRC; exit; }
 
 echo "Extracting $NEWLIB_SRC"
-tar -xzf $TOOLCHAIN_DL_DIR/$NEWLIB_SRC.tar.gz || { echo "Error extracting "$NEWLIB_SRC; exit; }
+tar -xzvf download/$NEWLIB_SRC.tar.gz || { echo "Error extracting "$NEWLIB_SRC; exit; }
 
 echo "Extracting $GDB_SRC"
-tar -xjf $TOOLCHAIN_DL_DIR/$GDB_SRC.tar.bz2 || { echo "Error extracting "$GDB_SRC; exit; }
+tar -xjvf download/$GDB_SRC.tar.bz2 || { echo "Error extracting "$GDB_SRC; exit; }
 
 echo "Extracting $GMP_SRC"
-tar -xjf $TOOLCHAIN_DL_DIR/$GMP_SRC.tar.bz2 || { echo "Error extracting "$GMP_SRC; exit; }
+tar -xjvf download/$GMP_SRC.tar.bz2 || { echo "Error extracting "$GMP_SRC; exit; }
 
 echo "Extracting $MPFR_SRC"
-tar -xjf $TOOLCHAIN_DL_DIR/$MPFR_SRC.tar.bz2 || { echo "Error extracting "$MPFR_SRC; exit; }
+tar -xjvf download/$MPFR_SRC.tar.bz2 || { echo "Error extracting "$MPFR_SRC; exit; }
 
 echo "Extracting $EXPAT_SRC"
-tar -xzf $TOOLCHAIN_DL_DIR/$EXPAT_SRC.tar.gz || { echo "Error extracting "$EXPAT_SRC; exit; }
+tar -xzvf download/$EXPAT_SRC.tar.gz || { echo "Error extracting "$EXPAT_SRC; exit; }
+
+echo "Extracting $ZLIB_SRC"
+tar -xjvf download/$ZLIB_SRC.tar.bz2 || { echo "Error extracting "$ZLIB_SRC; exit; }
 
 echo "Extracting $MPC_SRC"
-tar -xzf $TOOLCHAIN_DL_DIR/$MPC_SRC.tar.gz || { echo "Error extracting "$MPC_SRC; exit; }
-
+tar -xzvf download/$MPC_SRC.tar.gz || { echo "Error extracting "$MPC_SRC; exit; }
 
 #---------------------------------------------------------------------------------
 # Apply patches
@@ -69,14 +68,12 @@ echo "Patching $GCC_SRC"
 patch -p1 -d $GCC_SRC < patches/$GCC_SRC.patch || { echo "Error patching "$GCC_SRC; exit; }
 echo
 
-#echo
-#echo "Patching $NEWLIB_SRC"
-#patch -p1 -d $NEWLIB_SRC < patches/$NEWLIB_SRC.patch || { echo "Error patching "$NEWLIB_SRC; exit; }
-#echo
+echo
+echo "Patching $NEWLIB_SRC"
+patch -p1 -d $NEWLIB_SRC < patches/$NEWLIB_SRC.patch || { echo "Error patching "$NEWLIB_SRC; exit; }
+echo
 
 echo
 echo "Patching $BINUTILS_SRC"
 patch -p1 -d $BINUTILS_SRC < patches/$BINUTILS_SRC.patch || { echo "Error patching "$BINUTILS_SRC; exit; }
 echo
-
-

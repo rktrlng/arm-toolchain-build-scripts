@@ -3,7 +3,7 @@
 # 
 # YAGARTO toolchain                                                       
 #                                                                            
-# Copyright (C) 2006-2011 by Michael Fischer                                      
+# Copyright (C) 2006-2012 by Michael Fischer                                      
 # Michael.Fischer@yagarto.de                                                 
 #                                                                            
 # This program is free software; you can redistribute it and/or modify       
@@ -22,7 +22,7 @@
 # 
 
 #---------------------------------------------------------------------------------
-# build and install binutils
+# build and install expat
 #---------------------------------------------------------------------------------
 
 echo "Start of build:" > 01-temp.txt
@@ -31,8 +31,15 @@ date >> 01-temp.txt
 mkdir -p expat-build
 cd expat-build
 
+if [ "$OSTYPE" = "msys" ]
+then
+export CFLAGS=-D__USE_MINGW_ACCESS
+fi
+
 ../$EXPAT_SRC/configure \
-	--prefix=$addon_tools_dir --disable-shared \
+	--prefix=$addon_tools_dir \
+	--disable-shared \
+	--disable-nls \
 	|| { echo "Error configuring expat"; exit 1; }
 
 $MAKE || { echo "Error building expat"; exit 1; }

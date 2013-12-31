@@ -3,7 +3,7 @@
 # 
 # YAGARTO toolchain                                                       
 #                                                                            
-# Copyright (C) 2006-2011 by Michael Fischer                                      
+# Copyright (C) 2006-2012 by Michael Fischer                                      
 # Michael.Fischer@yagarto.de                                                 
 #                                                                            
 # This program is free software; you can redistribute it and/or modify       
@@ -22,36 +22,33 @@
 # 
 
 #---------------------------------------------------------------------------------
-# build and install just the c compiler
+# build and install mpfr
 #---------------------------------------------------------------------------------
 
-echo "Start of build:" > 06-temp.txt
-date >> 06-temp.txt 
+echo "Start of build:" > 04-temp.txt
+date >> 04-temp.txt 
 
-mkdir -p gcc-build
-cd gcc-build
+mkdir -p mpfr-build
+cd mpfr-build
 
-export CFLAGS="-I$addon_tools_dir/include"
-export LDFLAGS="-L$addon_tools_dir/lib"
+if [ "$OSTYPE" = "msys" ]
+then
+export CFLAGS=-D__USE_MINGW_ACCESS
+fi
 
-../$GCC_SRC/configure \
-	--target=$target --prefix=$prefix \
-	--disable-nls --disable-shared --disable-threads \
-	--with-gcc --with-gnu-ld --with-gnu-as --with-dwarf2 \
-	--enable-languages=c,c++ --enable-interwork --enable-multilib \
-	--with-newlib --with-headers=../newlib-$NEWLIB_VER/newlib/libc/include \
-	--disable-libssp --disable-libstdcxx-pch --disable-libmudflap \
-	--disable-libgomp -v \
-	|| { echo "Error configuring gcc"; exit 1; }
+../$MPFR_SRC/configure $ABI_MODE \
+	--prefix=$addon_tools_dir \
+	--disable-shared \
+	--with-gmp-build=../gmp-build \
+	|| { echo "Error configuring mpfr"; exit 1; }
 
-mkdir -p libiberty libcpp fixincludes
-
-$MAKE all-gcc || { echo "Error building gcc"; exit 1; }
-$MAKE install-gcc || { echo "Error installing gcc"; exit 1; }
+$MAKE || { echo "Error building mpfr"; exit 1; }
+$MAKE install || { echo "Error installing mpfr"; exit 1; }
 
 cd ..
 
-echo "End of build:" >> 06-temp.txt
-date >> 06-temp.txt 
-mv 06-temp.txt 06-ready.txt
+echo "End of build:" >> 04-temp.txt
+date >> 04-temp.txt 
+mv 04-temp.txt 04-ready.txt
+
 
