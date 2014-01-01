@@ -9,25 +9,20 @@ http://www.yagarto.org/
 http://sourceforge.net/projects/yagarto/
 
 Build Instructions
-==================
+------------------
 
-1. Install required packages
+0. Install required packages
 
-    Debian:
-    apt-get install build-essential automake bzip2 libtool gcc-multilib libncurses5-dev
-    
-    Raspbian:
-    apt-get install bzip2 libtoollibncurses5-dev flex bison texlive
+   - Debian: apt-get install build-essential automake bzip2 libtool gcc-multilib libncurses5-dev
+   - Raspbian: apt-get install bzip2 libtoollibncurses5-dev flex bison texlive
+   - CentOS: yum install gcc gcc-c++ make autoconf glibc-devel.i386 libstdc++-devel.i386 automake ncurses-devel
 
-    CentOS:
-    yum install gcc gcc-c++ make autoconf glibc-devel.i386 libstdc++-devel.i386 automake ncurses-devel
-
-2. Download / extract scripts
+1. Download / extract scripts
 
    - Set options for 32 or 64 bits in '_env-only.sh' (this must match to the host that is going to run the cross compiler)
    - Update version numbers in _env-only.sh as needed (see download/README.TXT)
 
-3. Download src packages into download directory (or skip to step 4, but run "./auto.sh")
+2. Download src packages into download directory (or skip to the step, and run "./auto.sh")
 
    expat-2.0.1
    http://sourceforge.net/projects/expat/files/expat/2.0.1/expat-2.0.1.tar.gz
@@ -56,12 +51,12 @@ Build Instructions
    mpc-1.0.1
    http://www.multiprecision.org/mpc/download/mpc-1.0.1.tar.gz
 
-4. Run "./xx-build-all.sh" (or "./auto.sh" to download sources) to start the build
+3. Run "./xx-build-all.sh" (or "./auto.sh" to download sources) to start the build
    - Go make a snack and watch a movie, it's gonna take anywhere from 15 minutes to multiple hours.
    - The build *should* be successfull if there's a file named "xx-ready.txt" and a numbered "-ready.txt" for each build script.
 
 Installation
-============
+------------
 
     cd install
     mkdir /opt/yagarto
@@ -69,12 +64,12 @@ Installation
     export PATH=$PATH:/opt/yagarto/bin    #or add to your .profile or whatever
 
 Uninstall
-=========
+---------
 
     rm -rf /opt/yagarto
 
 Credit
-======
+------
 
 Credit goes to Michael Fischer (www.yagarto.org) for the original scripts. 
 
