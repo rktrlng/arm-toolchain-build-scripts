@@ -20,36 +20,19 @@ Install required packages
 Download / extract scripts
 
    - Set options for 32 or 64 bits in '_env-only.sh' (this must match to the host that is going to run the cross compiler)
-   - Update version numbers in _env-only.sh as needed (see download/README.TXT)
+   - Update version numbers in _env-only.sh as needed (see download/README.md)
 
 Download src packages into download directory (or skip to the step, and run "./auto.sh")
 
-   expat-2.0.1
-   http://sourceforge.net/projects/expat/files/expat/2.0.1/expat-2.0.1.tar.gz
-
-   zlib-1.2.3
-   ftp://ftp.spline.inf.fu-berlin.de/pub/gentoo/distfiles/zlib-1.2.3.tar.bz2
-
-   gmp-5.0.4
-   ftp://ftp.gmplib.org/pub/gmp-5.0.4/gmp-5.0.4.tar.bz2
-
-   mpfr-2.4.2
-   http://www.mpfr.org/mpfr-2.4.2/mpfr-2.4.2.tar.bz2
-
-   binutils-2.24
-   http://ftp.gnu.org/gnu/binutils/binutils-2.24.tar.bz2
-
-   gcc-4.8.2
-   ftp://sources.redhat.com/pub/gcc/releases/gcc-4.8.2/gcc-4.8.2.tar.bz2
-
-   newlib-1.20.0
-   ftp://sources.redhat.com/pub/newlib/newlib-1.20.0.tar.gz
-
-   gdb-7.6.2
-   ftp://sources.redhat.com/pub/gdb/releases/gdb-7.6.2.tar.bz2
-
-   mpc-1.0.1
-   http://www.multiprecision.org/mpc/download/mpc-1.0.1.tar.gz
+   - expat-2.0.1 http://sourceforge.net/projects/expat/files/expat/2.0.1/expat-2.0.1.tar.gz
+   - zlib-1.2.3 ftp://ftp.spline.inf.fu-berlin.de/pub/gentoo/distfiles/zlib-1.2.3.tar.bz2
+   - gmp-5.0.4 ftp://ftp.gmplib.org/pub/gmp-5.0.4/gmp-5.0.4.tar.bz2
+   - mpfr-2.4.2 http://www.mpfr.org/mpfr-2.4.2/mpfr-2.4.2.tar.bz2
+   - binutils-2.24  http://ftp.gnu.org/gnu/binutils/binutils-2.24.tar.bz2
+   - gcc-4.8.2 ftp://sources.redhat.com/pub/gcc/releases/gcc-4.8.2/gcc-4.8.2.tar.bz2
+   - newlib-1.20.0 ftp://sources.redhat.com/pub/newlib/newlib-1.20.0.tar.gz
+   - gdb-7.6.2 ftp://sources.redhat.com/pub/gdb/releases/gdb-7.6.2.tar.bz2
+   - mpc-1.0.1 http://www.multiprecision.org/mpc/download/mpc-1.0.1.tar.gz
 
 Run "./xx-build-all.sh" (or "./auto.sh" to download sources) to start the build
    - Go make a snack and watch a movie, it's gonna take anywhere from 15 minutes to multiple hours.
