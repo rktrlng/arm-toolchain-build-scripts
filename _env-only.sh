@@ -22,7 +22,7 @@
 # 
 
 if [ -z "$TOOLCHAIN_DL_DIR" ]; then
-export TOOLCHAIN_DL_DIR=download/
+export TOOLCHAIN_DL_DIR=download
 fi
 
 export target=arm-none-eabi
@@ -40,8 +40,11 @@ export PATH="$PATH:$prefix/bin"
 #---------------------------------------------------------------------------------
 # Specify the version we will use
 #---------------------------------------------------------------------------------
-export ABI_MODE='ABI=64'
-export CC='gcc -m64'
+#export ABI_MODE=           # 'standard'
+#export ABI_MODE='ABI=32'   # force 32 bit
+export ABI_MODE='ABI=64'   # force 64 bit
+
+export CC='gcc -m64'       # 64 bit (comment out this line for 32 bit)
 
 
 BINUTILS_VER=2.24
@@ -71,4 +74,3 @@ export MPFR_SRC="mpfr-$MPFR_VER"
 export EXPAT_SRC="expat-$EXPAT_VER"
 export ZLIB_SRC="zlib-$ZLIB_VER"
 export MPC_SRC="mpc-$MPC_VER"
-

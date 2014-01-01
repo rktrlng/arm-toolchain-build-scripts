@@ -34,31 +34,31 @@
 #---------------------------------------------------------------------------------
 
 echo "Extracting $BINUTILS_SRC"
-tar -xjvf download/binutils-$BINUTILS_VER.tar.bz2 || { echo "Error extracting "$BINUTILS_SRC; exit; }
+tar -xjvf $TOOLCHAIN_DL_DIR/binutils-$BINUTILS_VER.tar.bz2 || { echo "Error extracting "$BINUTILS_SRC; exit; }
 
 echo "Extracting $GCC_SRC"
-tar -xjvf download/$GCC_SRC.tar.bz2 || { echo "Error extracting "$GCC_SRC; exit; }
+tar -xjvf $TOOLCHAIN_DL_DIR/$GCC_SRC.tar.bz2 || { echo "Error extracting "$GCC_SRC; exit; }
 
 echo "Extracting $NEWLIB_SRC"
-tar -xzvf download/$NEWLIB_SRC.tar.gz || { echo "Error extracting "$NEWLIB_SRC; exit; }
+tar -xzvf $TOOLCHAIN_DL_DIR/$NEWLIB_SRC.tar.gz || { echo "Error extracting "$NEWLIB_SRC; exit; }
 
 echo "Extracting $GDB_SRC"
-tar -xjvf download/$GDB_SRC.tar.bz2 || { echo "Error extracting "$GDB_SRC; exit; }
+tar -xjvf $TOOLCHAIN_DL_DIR/$GDB_SRC.tar.bz2 || { echo "Error extracting "$GDB_SRC; exit; }
 
 echo "Extracting $GMP_SRC"
-tar -xjvf download/$GMP_SRC.tar.bz2 || { echo "Error extracting "$GMP_SRC; exit; }
+tar -xjvf $TOOLCHAIN_DL_DIR/$GMP_SRC.tar.bz2 || { echo "Error extracting "$GMP_SRC; exit; }
 
 echo "Extracting $MPFR_SRC"
-tar -xjvf download/$MPFR_SRC.tar.bz2 || { echo "Error extracting "$MPFR_SRC; exit; }
+tar -xjvf $TOOLCHAIN_DL_DIR/$MPFR_SRC.tar.bz2 || { echo "Error extracting "$MPFR_SRC; exit; }
 
 echo "Extracting $EXPAT_SRC"
-tar -xzvf download/$EXPAT_SRC.tar.gz || { echo "Error extracting "$EXPAT_SRC; exit; }
+tar -xzvf $TOOLCHAIN_DL_DIR/$EXPAT_SRC.tar.gz || { echo "Error extracting "$EXPAT_SRC; exit; }
 
 echo "Extracting $ZLIB_SRC"
-tar -xjvf download/$ZLIB_SRC.tar.bz2 || { echo "Error extracting "$ZLIB_SRC; exit; }
+tar -xjvf $TOOLCHAIN_DL_DIR/$ZLIB_SRC.tar.bz2 || { echo "Error extracting "$ZLIB_SRC; exit; }
 
 echo "Extracting $MPC_SRC"
-tar -xzvf download/$MPC_SRC.tar.gz || { echo "Error extracting "$MPC_SRC; exit; }
+tar -xzvf $TOOLCHAIN_DL_DIR/$MPC_SRC.tar.gz || { echo "Error extracting "$MPC_SRC; exit; }
 
 #---------------------------------------------------------------------------------
 # Apply patches

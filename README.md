@@ -11,19 +11,23 @@ http://sourceforge.net/projects/yagarto/
 Build Instructions
 ==================
 
-0. Install required packages
+1. Install required packages
 
-    #Debian:
+    Debian:
     apt-get install build-essential automake bzip2 libtool gcc-multilib libncurses5-dev
+    
+    Raspbian:
+    apt-get install bzip2 libtoollibncurses5-dev flex bison texlive
 
-    #CentOS:
+    CentOS:
     yum install gcc gcc-c++ make autoconf glibc-devel.i386 libstdc++-devel.i386 automake ncurses-devel
 
-1. Download / extract scripts
+2. Download / extract scripts
 
-    Set CC and ABI_MODE to 32 or 64 bits in '_env-only.sh' for a 32 or 64 bit compiler (this must match to the host that runs the cross compiler)
+   - Set options for 32 or 64 bits in '_env-only.sh' (this must match to the host that is going to run the cross compiler)
+   - Update version numbers in _env-only.sh as needed (see download/README.TXT)
 
-2. Download src packages into download directory (or run auto.sh after step 3)
+3. Download src packages into download directory (or skip to step 4, but run "./auto.sh")
 
    expat-2.0.1
    http://sourceforge.net/projects/expat/files/expat/2.0.1/expat-2.0.1.tar.gz
@@ -52,9 +56,7 @@ Build Instructions
    mpc-1.0.1
    http://www.multiprecision.org/mpc/download/mpc-1.0.1.tar.gz
 
-3. Update version numbers in _env-only.sh as needed (see download/README.TXT)
-
-4. Run "bash xx-build-all.sh" to start the build
+4. Run "./xx-build-all.sh" (or "./auto.sh" to download sources) to start the build
    - Go make a snack and watch a movie, it's gonna take anywhere from 15 minutes to multiple hours.
    - The build *should* be successfull if there's a file named "xx-ready.txt" and a numbered "-ready.txt" for each build script.
 
@@ -90,4 +92,4 @@ amour03:
 
 rktrlng:
 - scripts based on yagarto for OS X (20121222)
-- had to revert back to gmp-5.0.4 + mpfr-2.4.2 to get it to build on 64 bit (Ubuntu 1310)
+- had to revert back to gmp-5.0.4 + mpfr-2.4.2 to get it to build on 64 bit (Ubuntu 13.10)
