@@ -1,15 +1,13 @@
-arm-toolchain-build-scripts
-===========================
+# arm-toolchain-build-scripts
 
 Scripts for building a gcc-based ARM toolchain on Linux.
 
 Based almost entirely on YAGARTO build scripts by Michael Fischer: 
 
-http://www.yagarto.org/
-http://sourceforge.net/projects/yagarto/
+   - home: http://www.yagarto.org/
+   - source: http://sourceforge.net/projects/yagarto/
 
-Build Instructions
-------------------
+### Build
 
 Install required packages
 
@@ -19,10 +17,10 @@ Install required packages
 
 Download / extract scripts
 
-   - Set options for 32 or 64 bits in '_env-only.sh' (this must match to the host that is going to run the cross compiler)
-   - Update version numbers in _env-only.sh as needed (see download/README.md)
+   - Set options for 32 or 64 bits in '_env-only.sh' (must match to host does the cross compiling)
+   - Update version numbers in '_env-only.sh' as needed (see download/README.md)
 
-Download src packages into download directory (or skip to the step, and run "./auto.sh")
+Download src packages into download directory (or skip to the next step, and run './auto.sh')
 
    - expat-2.0.1 http://sourceforge.net/projects/expat/files/expat/2.0.1/expat-2.0.1.tar.gz
    - zlib-1.2.3 ftp://ftp.spline.inf.fu-berlin.de/pub/gentoo/distfiles/zlib-1.2.3.tar.bz2
@@ -37,22 +35,20 @@ Download src packages into download directory (or skip to the step, and run "./a
 Run "./xx-build-all.sh" (or "./auto.sh" to download sources) to start the build
    - Go make a snack and watch a movie, it's gonna take anywhere from 15 minutes to multiple hours.
    - The build *should* be successfull if there's a file named "xx-ready.txt" and a numbered "-ready.txt" for each build script.
+   - 'xx-restart.sh' will delete all '*-build' directories and starts building from scratch.
 
-Installation
-------------
+### Install
 
     cd install
     mkdir /opt/yagarto
     cp -R * /opt/yagarto
     export PATH=$PATH:/opt/yagarto/bin    #or add to your .profile or whatever
 
-Uninstall
----------
+### Uninstall
 
     rm -rf /opt/yagarto
 
-Credit
-------
+### Credit
 
 Credit goes to Michael Fischer (www.yagarto.org) for the original scripts. 
 
@@ -69,5 +65,5 @@ amour03:
 - extra environment vars
 
 rktrlng:
-- scripts based on yagarto for OS X (20121222)
+- scripts based on yagarto for OS X 20121222
 - had to revert back to gmp-5.0.4 + mpfr-2.4.2 to get it to build on 64 bit (Ubuntu 13.10)

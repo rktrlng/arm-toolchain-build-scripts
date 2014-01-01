@@ -40,7 +40,7 @@ export PATH="$PATH:$prefix/bin"
 #---------------------------------------------------------------------------------
 # Specify the version we will use
 #---------------------------------------------------------------------------------
-#export ABI_MODE=           # 'standard'
+#export ABI_MODE=           # 'standard' (try this first!)
 #export ABI_MODE='ABI=32'   # force 32 bit
 export ABI_MODE='ABI=64'   # force 64 bit
 
