@@ -1,6 +1,6 @@
-# arm-toolchain-build-scripts
+# ARM toolchain build scripts
 
-Scripts for building a gcc-based ARM toolchain on Linux.
+Scripts for building a gcc-based ARM toolchain on Linux (target=arm-none-eabi).
 
 Based almost entirely on YAGARTO build scripts by Michael Fischer: 
 
@@ -17,7 +17,7 @@ Install required packages
 
 Download / extract scripts
 
-   - Set options for 32 or 64 bits in '_env-only.sh' (must match to host does the cross compiling)
+   - Set options for 32 or 64 bits in '_env-only.sh' (must match to host that does the cross compiling)
    - Update version numbers in '_env-only.sh' as needed (see download/README.md)
 
 Download src packages into download directory (or skip to the next step, and run './auto.sh')
