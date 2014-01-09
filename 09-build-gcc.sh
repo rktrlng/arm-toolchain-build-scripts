@@ -30,6 +30,11 @@ date >> 09-temp.txt
 
 cd gcc-build
 
+#export LD_LIBRARY_PATH=$addon_tools_dir/lib:$LD_LIBRARY_PATH
+
+#export CFLAGS="-I$addon_tools_dir/include"
+#export LDFLAGS="-L$addon_tools_dir/lib"
+
 $MAKE || { echo "Error building gcc2"; exit 1; }
 $MAKE install || { echo "Error installing gcc2"; exit 1; }
 

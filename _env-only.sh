@@ -28,7 +28,7 @@ fi
 export target=arm-none-eabi
 export scripts_root=$(pwd)
 export prefix=$(pwd)/install
-export MAKE=make
+export MAKE=make -j8
 export addon_tools_dir=$(pwd)/addontools
 
 mkdir -p $prefix

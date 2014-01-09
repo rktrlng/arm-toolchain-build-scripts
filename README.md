@@ -1,11 +1,27 @@
 # ARM toolchain build scripts
 
-Scripts for building a gcc-based ARM toolchain on Linux (target=arm-none-eabi).
+Scripts for building a gcc-based ARM toolchain on Linux (target=arm-none-eabi) for building for the Cortex-M4 line of ARM processors, using hardware floating point instructions and calling conventions.
 
 Based almost entirely on YAGARTO build scripts by Michael Fischer: 
 
    - home: http://www.yagarto.org/
    - source: http://sourceforge.net/projects/yagarto/
+
+The target is arm-none-eabi, and gcc is built with the following multilibs:
+
+    .;
+    thumb;@mthumb
+    thumb/thumb2;@mthumb@march=armv7
+    thumb/armv6-m;@mthumb@march=armv6-m
+    thumb/cortex-m4/float-abi-hard/fpuv4-sp-d16;@mthumb@mcpu=cortex-m4@mfloat-abi=hard@mfpu=fpv4-sp-d16
+
+When building your programs the CFLAGS you want are:
+
+    -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
+
+You may also want:
+
+    -mthumb-interwork -mlittle-endian
 
 ### Build
 
@@ -67,3 +83,4 @@ amour03:
 rktrlng:
 - scripts based on yagarto for OS X 20121222
 - had to revert back to gmp-5.0.4 + mpfr-2.4.2 to get it to build on 64 bit (Ubuntu 13.10)
+- gcc 4.8.2 was patched based on the patch here: https://github.com/prattmic/arm-cortex-m4-hardfloat-toolchain

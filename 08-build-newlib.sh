@@ -32,6 +32,11 @@ mkdir -p newlib-build
 cd newlib-build
 mkdir -p etc
 
+#export LD_LIBRARY_PATH=$addon_tools_dir/lib:$LD_LIBRARY_PATH
+
+#export CFLAGS="-I$addon_tools_dir/include"
+#export LDFLAGS="-L$addon_tools_dir/lib"
+
 ../$NEWLIB_SRC/configure \
 	--target=$target \
 	--prefix=$prefix \
