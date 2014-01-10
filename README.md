@@ -7,7 +7,7 @@ Based almost entirely on YAGARTO build scripts by Michael Fischer:
    - home: http://www.yagarto.org/
    - source: http://sourceforge.net/projects/yagarto/
 
-The target is arm-none-eabi, and gcc is built with the following multilibs:
+The target is arm-none-eabi, and gcc is built with the following multilibs (arm-none-eabi-gcc --print-multi-lib):
 
     .;
     thumb;@mthumb
@@ -83,4 +83,4 @@ amour03:
 rktrlng:
 - scripts based on yagarto for OS X 20121222
 - had to revert back to gmp-5.0.4 + mpfr-2.4.2 to get it to build on 64 bit (Ubuntu 13.10)
-- gcc 4.8.2 was patched based on the patch here: https://github.com/prattmic/arm-cortex-m4-hardfloat-toolchain
+- gcc-4.8.2 and newlib-1.20.0 patches based on patches here: https://github.com/prattmic/arm-cortex-m4-hardfloat-toolchain
